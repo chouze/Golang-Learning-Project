@@ -44,7 +44,26 @@ func noDupes(assignment [4][4]byte) (bool){
 }
 
 func skillsOk(assignment [4][4]byte, employees []Employee) (bool){
+	for i := 0; i < 4; i++{
+		if(!(findEmployee(employees, assignment[i][0]).phone == 1 &&
+		findEmployee(employees, assignment[i][1]).phone == 1 &&
+		findEmployee(employees, assignment[i][2]).computer == 1 &&
+		findEmployee(employees, assignment[i][3]).network == 1)){
+			return false
+		}
+	}
 	return true
+}
+
+func findEmployee(employees []Employee, name byte)(Employee){
+	for _, employee := range employees {
+		if (employee.name == name){
+			return employee
+		}
+	}
+	var empty = Employee{'x', -1, -1, -1}
+	return empty
+
 }
 
 func readLists () ([4][4]byte, []Employee){
