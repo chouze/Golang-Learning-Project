@@ -1,0 +1,86 @@
+package main
+
+	/*
+	//How to print a byte out as a character
+	var a byte
+	a = 'b'
+	fmt.Printf("%c", a)
+	*/
+
+
+
+import (
+	"fmt"
+	)
+
+type Employee struct{
+	name byte
+	phone int
+	computer int
+	network int
+}
+
+
+
+func main() {
+
+	assignment, employees := readLists()
+	
+	if(jobsOk(assignment, employees)){
+		fmt.Print("Acceptable")
+	} else{
+		fmt.Print("Not Acceptable")
+	}
+}
+
+func jobsOk(assignment [4][4]byte, employees []Employee) (bool){
+	return noDupes(assignment) && skillsOk(assignment, employees)
+
+}
+
+func noDupes(assignment [4][4]byte) (bool){
+
+	return true
+}
+
+func skillsOk(assignment [4][4]byte, employees []Employee) (bool){
+	return true
+}
+
+func readLists () ([4][4]byte, []Employee){
+	/*
+	for i := 0; i < 4; i++{
+		for j := 0; j < 4; j++{
+			//For actually reading things in
+		}
+	}
+	*/
+	
+	var shift = [4][4]byte{
+	{'a', 'b', 'c', 'd'},
+	{'e', 'f', 'g', 'h'},
+	{'i', 'j', 'k', 'l'},
+	{'m', 'n', 'o', 'p'}}
+	
+	var employees = []Employee{
+	{'a', 1, 1, 1},
+	{'b', 1, 1, 1},
+	{'c', 1, 1, 1},
+	{'d', 1, 1, 1},
+	{'e', 1, 1, 1},
+	{'f', 1, 1, 1},
+	{'g', 1, 1, 1},
+	{'h', 1, 1, 1},
+	{'i', 1, 1, 1},
+	{'j', 1, 1, 1},
+	{'k', 1, 1, 1},
+	{'l', 1, 1, 1},
+	{'m', 1, 1, 1},
+	{'n', 1, 1, 1},
+	{'o', 1, 1, 1},
+	{'p', 1, 1, 1}}
+
+	
+	
+	return shift, employees
+}
