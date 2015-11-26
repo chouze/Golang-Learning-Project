@@ -1,18 +1,8 @@
 package main
 
-	/*
-	//How to print a byte out as a character
-	var a byte
-	a = 'b'
-	fmt.Printf("%c", a)
-	*/
+import "fmt"
 
-
-
-import (
-	"fmt"
-	)
-
+//Structure to hold information about an employee
 type Employee struct{
 	name byte
 	phone int
@@ -20,10 +10,8 @@ type Employee struct{
 	network int
 }
 
-
-
+//Main function, called when program is run
 func main() {
-
 	assignment, employees := readLists()
 	
 	if(jobsOk(assignment, employees)){
@@ -33,18 +21,26 @@ func main() {
 	}
 }
 
+//Function to determine whether a schedule is acceptable or not
+//assignment is a two dimensional array of bytes (used like characters)
+//employees is a slice of Employee structures
+//this function returns a bool indicating whether the schedule is acceptable
 func jobsOk(assignment [4][4]byte, employees []Employee) (bool){
 	return noDupes(assignment) && skillsOk(assignment, employees)
 
 }
 
+
 func noDupes(assignment [4][4]byte) (bool){
+
+	//Flattens the schedule for easier use
 	flatSchedule := make([]byte, 4)
 	copy(flatSchedule, assignment[0][:])
 	for i := 1; i < 4; i++{
 		flatSchedule = append(flatSchedule, assignment[i][:]...)
 	}
 	
+	//Checks each name against the rest of the names in the list
 	for i, name := range flatSchedule{
 		if(contains(flatSchedule[i + 1:], name)){
 			return false
@@ -54,13 +50,15 @@ func noDupes(assignment [4][4]byte) (bool){
 	return true
 }
 
+
 func contains(schedule []byte, employee byte) bool {
-    for _, e := range schedule {
-        if e == employee {
-            return true
-        }
-    }
-    return false
+	//For each loop
+    	for _, e := range schedule {
+		if (e == employee) {
+			return true
+		}
+	}
+	return false
 }
 
 
@@ -76,26 +74,21 @@ func skillsOk(assignment [4][4]byte, employees []Employee) (bool){
 	return true
 }
 
+
 func findEmployee(employees []Employee, name byte)(Employee){
 	for _, employee := range employees {
 		if (employee.name == name){
 			return employee
 		}
 	}
+	//Dummy variable to return if the employee couldn't be found
 	var empty = Employee{'x', -1, -1, -1}
 	return empty
-
 }
 
+
 func readLists () ([4][4]byte, []Employee){
-	/*
-	for i := 0; i < 4; i++{
-		for j := 0; j < 4; j++{
-			//For actually reading things in
-		}
-	}
-	*/
-	
+
 	var shift = [4][4]byte{
 	{'a', 'b', 'c', 'd'},
 	{'e', 'f', 'g', 'h'},
@@ -120,7 +113,5 @@ func readLists () ([4][4]byte, []Employee){
 	{'o', 1, 1, 1},
 	{'p', 1, 1, 1}}
 
-	
-	
 	return shift, employees
 }
