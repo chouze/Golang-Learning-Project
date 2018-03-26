@@ -52,8 +52,7 @@ func noDupes(assignment [4][4]byte) (bool){
 
 
 func contains(schedule []byte, employee byte) bool {
-	//For each loop
-    	for _, e := range schedule {
+	for _, e := range schedule {
 		if (e == employee) {
 			return true
 		}
